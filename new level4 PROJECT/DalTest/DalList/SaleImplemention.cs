@@ -12,18 +12,31 @@ public class SaleImplemention:Isale
         DataSource.Ssale.Add(sale1);
         return myId;
     }
-    public Sale? Read(int id)
+    public Sale? Read(Func<Sale, bool> filter)
     {
-        if (DataSource.Ssale.Exists((sal) => sal.id_product == id))
-            return (DataSource.Ssale.Find((sal) => sal.id_product == id));
-        throw new DalIdNotExsist("sale is not exsist");
+        if (filter == null)
+            throw new ArgumentNullException(nameof(filter));
 
-    }
-    public List<Sale> ReadAll()
-    {
-        List<Sale> sale = new List<Sale>();
-        sale = DataSource.Ssale;
+        Sale? sale = DataSource.Ssale
+            .FirstOrDefault(filter);
+
+        if (sale == null)
+            throw new DalIdNotExsist("customer is not exist");
+
         return sale;
+    }
+    public List<Sale?> ReadAll(Func<Sale, bool>? filter = null)
+    {
+        if (filter == null)
+            return DataSource.Ssale
+                .Select(s => s)
+                .Cast<Sale?>()
+                .ToList();
+
+        return DataSource.Ssale
+            .Where(filter)
+            .Cast<Sale?>()
+            .ToList();
     }
     public void Update(Sale sale)
     {

@@ -17,18 +17,28 @@ public class CustomerImplemention: Icustomer
         throw new DalIdExsist("customers is already");
     }
 
-    public Customer? Read(int id)
+    public Customer? Read(Func<Customer, bool> filter)
     {
-        if (DataSource.Scustomers.Exists((cus) => cus.id == id))
-           return (DataSource.Scustomers.Find((cus) => cus.id == id));
-        throw new DalIdNotExsist("customer is not exsist");
+        if (filter == null)
+            throw new ArgumentNullException(nameof(filter));
 
+        Customer? customer = DataSource.Scustomers
+            .FirstOrDefault(filter);
+
+        if (customer == null)
+            throw new DalIdNotExsist("customer is not exist");
+
+        return customer;
     }
-    public List<Customer> ReadAll()
-    { 
-        List<Customer> customers = new List<Customer>();
-        customers=DataSource.Scustomers;
-        return customers;
+    public List<Customer?> ReadAll(Func<Customer, bool>? filter = null)
+    {
+        if (filter == null)
+            return DataSource.Scustomers!.Cast<Customer?>().ToList();
+
+        return DataSource.Scustomers!
+               .Where(filter)
+               .Cast<Customer?>()
+               .ToList();
     }
     public void Update(Customer customer)
     {

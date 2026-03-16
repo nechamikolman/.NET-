@@ -11,18 +11,31 @@ public class ProductImplemention:Iproduct
         DataSource.Sproduct.Add(product1);
         return myId;
     }
-    public Product? Read(int id)
+    public Product? Read(Func<Product, bool> filter)
     {
-        if (DataSource.Sproduct.Exists((pro) => pro.id == id))
-            return (DataSource.Sproduct.Find((pro) => pro.id == id));
-        throw new DalIdNotExsist("product is not exsist");
+        if (filter == null)
+            throw new ArgumentNullException(nameof(filter));
 
+        Product? product = DataSource.Sproduct
+            .FirstOrDefault(filter);
+
+        if (product == null)
+            throw new DalIdNotExsist("product is not exist");
+
+        return product;
     }
-    public List<Product> ReadAll()
+    public List<Product?> ReadAll(Func<Product, bool>? filter = null)
     {
-        List<Product> products = new List<Product>();
-        products = DataSource.Sproduct;
-        return products;
+        if (filter == null)
+            return DataSource.Sproduct
+                .Select(p => p)
+                .Cast<Product?>()
+                .ToList();
+
+        return DataSource.Sproduct
+            .Where(filter)
+            .Cast<Product?>()
+            .ToList();
     }
     public void Update(Product product)
     {

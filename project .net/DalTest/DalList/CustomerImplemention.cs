@@ -22,8 +22,7 @@ public class CustomerImplemention: Icustomer
         if (filter == null)
             throw new ArgumentNullException(nameof(filter));
 
-        Customer? customer = DataSource.Scustomers
-            .FirstOrDefault(filter);
+        Customer? customer = DataSource.Scustomers.FirstOrDefault(filter);
 
         if (customer == null)
             throw new DalIdNotExsist("customer is not exist");

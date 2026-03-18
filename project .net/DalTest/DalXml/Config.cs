@@ -4,32 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace DalXml
 {
     internal static class Config
     {
-        private const string nameconfig = "data-config";
+        private const string filePath = "../xml/data-config.xml";
 
-        public static int ProductNum
+        public static int ProductId
         {
             get
             {
-                ProductNum++;
-                SaveConfig(); 
-                return ProductNum;
-            }
-            set
-            {
-                ProductNum = value;
+                XElement file = XElement.Load(filePath);
+                XElement curProID = file.Element("productId");
+                int num = int.Parse(curProID.Value);
+                curProID.SetValue(num + 1);
+                file.Save(filePath);
+                return num;
             }
         }
-        private static void SaveConfig()
+        public static int SaleId
         {
-            var doc = new System.Xml.XmlDocument();
-            doc.Load(nameconfig);
-            doc.SelectSingleNode("/config/ProductNum").InnerText = ProductNum.ToString();
-            doc.Save(nameconfig);
+            get
+            {
+                XElement file = XElement.Load(filePath);
+                XElement curSaleId = file.Element("saleId");
+                int num = int.Parse(curSaleId.Value);
+                curSaleId.SetValue(num + 1);
+                file.Save(filePath);
+                return num;
+            }
         }
 
 

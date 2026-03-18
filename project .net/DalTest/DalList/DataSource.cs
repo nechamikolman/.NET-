@@ -13,8 +13,8 @@ internal static class DataSource
         internal const int SaleMinCode=200;
         private static int ProductIndex = ProductMinCode;
         private static int SaleIndex = SaleMinCode;
-        public static int ProductCode=>ProductIndex+=1;
-        public static int SaleCode => SaleIndex +=1;
+        public static int ProductId=>ProductIndex+=1;
+        public static int SaleId => SaleIndex +=1;
 
     }
 }

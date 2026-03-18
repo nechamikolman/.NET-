@@ -16,6 +16,7 @@ namespace Dal
         public DalIdExsist(string massage, Exception inner_exeption) : base(massage, inner_exeption) { }
 
     }
+    
 
 
 }

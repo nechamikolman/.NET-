@@ -1,62 +1,170 @@
 ﻿using DalApi;
+using DalXml;
 using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Dal;
 
 internal class ProductImplementation:Iproduct
 {
-    public int Create(Product product)
+    string filePath = "../xml/products.xml";
+    public int Create(Product pro)
     {
-        int myId = DataSource.Config.ProductCode;
-        Product product1 = product with { id = myId };
-        DataSource.Sproduct.Add(product1);
-        return myId;
-    }
-    public Product? Read(Func<Product, bool> filter)
-    {
-        if (filter == null)
-            throw new ArgumentNullException(nameof(filter));
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Product>));
+        List<Product> products;
 
-        Product? product = DataSource.Sproduct
-            .FirstOrDefault(filter);
-
-        if (product == null)
-            throw new DalIdNotExsist("product is not exist");
-
-        return product;
-    }
-    public List<Product?> ReadAll(Func<Product, bool>? filter = null)
-    {
-        if (filter == null)
-            return DataSource.Sproduct
-                .Select(p => p)
-                .Cast<Product?>()
-                .ToList();
-
-        return DataSource.Sproduct
-            .Where(filter)
-            .Cast<Product?>()
-            .ToList();
-    }
-    public void Update(Product product)
-    {
-        if (DataSource.Sproduct.Exists((pro) => pro.id == product.id))
+        if (File.Exists(filePath))
         {
-            Delete(DataSource.Sproduct.Find((cus) => cus.id == product.id).id);
-            DataSource.Sproduct.Add(product);
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                products = serializer.Deserialize(reader) as List<Product>;
+            }
+        }
+        else
+        {
+            products = new List<Product>();
+        }
+        Product pro2 = pro with { id = Config.ProductId };
+        products.Add(pro2);
+
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            serializer.Serialize(writer, products);
         }
 
+        return pro2.id;
     }
-    public void Delete(int id)
+    public Customer? Read(int id)
     {
-        if (DataSource.Sproduct.Exists((pro) => pro.id == id))
-            DataSource.Sproduct.Remove((DataSource.Sproduct.Find((pro) => pro.id == id)));
-        throw new DalIdNotExsist("product id is not exsist");
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+
+        if (!File.Exists(filePath))
+            return null;
+
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            customers = serializer.Deserialize(reader) as List<Customer>;
+        }
+
+        return customers.FirstOrDefault(c => c.CustomerId == id);
+    }
+
+    public Customer? Read(Func<Customer, bool> filter)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+
+
+
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            customers = serializer.Deserialize(reader) as List<Customer>;
+        }
+
+        return customers.FirstOrDefault(c => filter(c) == true);
+    }
+
+    public List<Customer?> ReadAll(Func<Customer, bool>? filter = null)
+    {
+
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+
+        if (!File.Exists(filePath))
+            return null;
+
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            customers = serializer.Deserialize(reader) as List<Customer>;
+        }
+        if (filter != null)
+            customers = customers.Where(filter).ToList();
+        return customers;
+
+
 
     }
+    public List<Customer?> ReadAll()
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+
+        if (!File.Exists(filePath))
+            return null;
+
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            customers = serializer.Deserialize(reader) as List<Customer>;
+        }
+
+        return customers;
+
+    }
+
+    public void Delete(int cusId)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+        if (File.Exists(filePath))
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                customers = serializer.Deserialize(reader) as List<Customer>;
+            }
+        }
+        else
+        {
+            customers = new List<Customer>();
+        }
+        Customer cus = customers.FirstOrDefault(c => c.CustomerId == cusId);
+        customers.Remove(cus);
+
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            serializer.Serialize(writer, customers);
+        }
+
+
+    }
+
+    public void Update(Customer cus)
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+        List<Customer> customers;
+
+        if (File.Exists(filePath))
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                customers = serializer.Deserialize(reader) as List<Customer>;
+            }
+        }
+        else
+        {
+            customers = new List<Customer>();
+        }
+        Customer newcustomer = customers.FirstOrDefault(c => c.CustomerId == cus.CustomerId);
+
+        if (newcustomer != null)
+        {
+            customers.Remove(newcustomer);
+            customers.Add(cus);
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, customers);
+            }
+        }
+    }
+
 }

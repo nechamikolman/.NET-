@@ -7,7 +7,7 @@ public class SaleImplemention:Isale
 {
     public int Create(Sale sale)
     {
-        int myId = DataSource.Config.SaleCode;
+        int myId = DataSource.Config.SaleId;
         Sale sale1 = sale with { id_product = myId };
         DataSource.Ssale.Add(sale1);
         return myId;
@@ -16,7 +16,6 @@ public class SaleImplemention:Isale
     {
         if (filter == null)
             throw new ArgumentNullException(nameof(filter));
-
         Sale? sale = DataSource.Ssale
             .FirstOrDefault(filter);
 

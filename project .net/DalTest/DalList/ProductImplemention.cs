@@ -6,7 +6,7 @@ public class ProductImplemention:Iproduct
 {
     public int Create(Product product)
     {
-        int myId = DataSource.Config.ProductCode;
+        int myId = DataSource.Config.ProductId;
         Product product1 = product with { id = myId };
         DataSource.Sproduct.Add(product1);
         return myId;
@@ -51,7 +51,6 @@ public class ProductImplemention:Iproduct
         if (DataSource.Sproduct.Exists((pro) => pro.id == id))
             DataSource.Sproduct.Remove((DataSource.Sproduct.Find((pro) => pro.id == id)));
         throw new DalIdNotExsist("product id is not exsist");
-
     }
 
 }

@@ -16,6 +16,6 @@ namespace DO
         int amount
         )
     {
-        public Product() : this(0,Categorys.Coffee, "", 0, 0) { }
+        public Product() : this(0, Categorys.Coffee, "", 0, 0) { }
     }
 }

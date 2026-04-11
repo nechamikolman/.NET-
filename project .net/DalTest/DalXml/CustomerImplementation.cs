@@ -1,17 +1,13 @@
 ﻿using DalApi;
 using DO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Dal;
 
-internal class CustomerImplementation:Icustomer
+internal class CustomerImplementation : Icustomer
 {
-    private string filePath = "../xml/data-config.xml";
+    private string filePath = "../xml/customers.xml";
+
     public int Create(Customer customer)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
@@ -19,10 +15,8 @@ internal class CustomerImplementation:Icustomer
 
         if (File.Exists(filePath))
         {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                customers = serializer.Deserialize(reader) as List<Customer>;
-            }
+            using StreamReader reader = new StreamReader(filePath);
+            customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
         }
         else
         {
@@ -31,56 +25,48 @@ internal class CustomerImplementation:Icustomer
 
         customers.Add(customer);
 
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            serializer.Serialize(writer, customers);
-        }
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, customers);
 
         return customer.id;
-       
     }
+
     public Customer? Read(Func<Customer, bool> filter)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
         if (!File.Exists(filePath))
             throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
 
-        return customers?.FirstOrDefault(filter);
+        using StreamReader reader = new StreamReader(filePath);
+        List<Customer> customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
+
+        return customers.FirstOrDefault(filter);
     }
+
     public List<Customer> ReadAll(Func<Customer, bool>? filter = null)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
         if (!File.Exists(filePath))
             throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
-        }
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
 
-        return filter == null ? customers:customers.Where(filter).ToList();
+        using StreamReader reader = new StreamReader(filePath);
+        List<Customer> customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
+
+        return filter == null ? customers : customers.Where(filter).ToList();
     }
+
     public void Update(Customer customer)
     {
-        XmlSerializer serializer= new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
         if (!File.Exists(filePath))
-        {
             throw new DalFileNotExsist();
-        }
-        using(StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
+
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
+
+        using StreamReader reader = new StreamReader(filePath);
+        List<Customer> customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
+
         int index = customers.FindIndex(c => c.id == customer.id);
 
         if (index == -1)
@@ -88,36 +74,28 @@ internal class CustomerImplementation:Icustomer
 
         customers[index] = customer;
 
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            serializer.Serialize(writer, customers);
-        }
-
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, customers);
     }
+
     public void Delete(int id)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
         if (!File.Exists(filePath))
             throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>
-                        ?? new List<Customer>();
-        }
+        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
 
-        var customerToDelete = customers.FirstOrDefault(c => c.id == id);
+        using StreamReader reader = new StreamReader(filePath);
+        List<Customer> customers = serializer.Deserialize(reader) as List<Customer> ?? new List<Customer>();
 
-        if (customerToDelete == null)
+        var customer = customers.FirstOrDefault(c => c.id == id);
+
+        if (customer == null)
             throw new DalCustomerNotExsist();
 
-        customers.Remove(customerToDelete);
+        customers.Remove(customer);
 
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            serializer.Serialize(writer, customers);
-        }
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, customers);
     }
 }

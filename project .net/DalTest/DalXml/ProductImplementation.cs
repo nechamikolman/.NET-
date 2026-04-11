@@ -1,170 +1,115 @@
 ﻿using DalApi;
 using DalXml;
 using DO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace Dal;
 
-internal class ProductImplementation:Iproduct
+internal class ProductImplementation : Iproduct
 {
-    string filePath = "../xml/products.xml";
-    public int Create(Product pro)
+    private string filePath = "../xml/products.xml";
+
+    public int Create(Product product)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Product>));
-        List<Product> products;
+        XElement root;
 
         if (File.Exists(filePath))
-        {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                products = serializer.Deserialize(reader) as List<Product>;
-            }
-        }
+            root = XElement.Load(filePath);
         else
-        {
-            products = new List<Product>();
-        }
-        Product pro2 = pro with { id = Config.ProductId };
-        products.Add(pro2);
+            root = new XElement("Products");
 
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            serializer.Serialize(writer, products);
-        }
+        int newId = Config.ProductId;
 
-        return pro2.id;
+        XElement newProduct = new XElement("Product",
+            new XElement("Id", newId),
+            new XElement("Category", product.category.ToString()),
+            new XElement("Name", product.name),
+            new XElement("Price", product.price),
+            new XElement("Amount", product.amount)
+        );
+
+        root.Add(newProduct);
+        root.Save(filePath);
+
+        return newId;
     }
-    public Customer? Read(int id)
+
+    public Product? Read(Func<Product, bool> filter)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
-
         if (!File.Exists(filePath))
-            return null;
+            throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
+        XElement root = XElement.Load(filePath);
 
-        return customers.FirstOrDefault(c => c.CustomerId == id);
+        var product = root.Elements("Product")
+            .Select(p => new Product(
+                (int)p.Element("Id"),
+                (Categorys)Enum.Parse(typeof(Categorys), p.Element("Category")!.Value),
+                (string)p.Element("Name"),
+                (double)p.Element("Price"),
+                (int)p.Element("Amount")
+            ))
+            .FirstOrDefault(filter);
+
+        return product;
     }
 
-    public Customer? Read(Func<Customer, bool> filter)
+    public List<Product> ReadAll(Func<Product, bool>? filter = null)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
-
-
-
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
-
-        return customers.FirstOrDefault(c => filter(c) == true);
-    }
-
-    public List<Customer?> ReadAll(Func<Customer, bool>? filter = null)
-    {
-
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
-
         if (!File.Exists(filePath))
-            return null;
+            throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
-        if (filter != null)
-            customers = customers.Where(filter).ToList();
-        return customers;
+        XElement root = XElement.Load(filePath);
 
+        var products = root.Elements("Product")
+            .Select(p => new Product(
+                (int)p.Element("Id"),
+                (Categorys)Enum.Parse(typeof(Categorys), p.Element("Category")!.Value),
+                (string)p.Element("Name"),
+                (double)p.Element("Price"),
+                (int)p.Element("Amount")
+            ))
+            .ToList();
 
-
+        return filter == null ? products : products.Where(filter).ToList();
     }
-    public List<Customer?> ReadAll()
+
+    public void Update(Product product)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
-
         if (!File.Exists(filePath))
-            return null;
+            throw new DalFileNotExsist();
 
-        using (StreamReader reader = new StreamReader(filePath))
-        {
-            customers = serializer.Deserialize(reader) as List<Customer>;
-        }
+        XElement root = XElement.Load(filePath);
 
-        return customers;
+        var existing = root.Elements("Product")
+            .FirstOrDefault(p => (int)p.Element("Id") == product.id);
 
+        if (existing == null)
+            throw new DalProductNotExsist();
+
+        existing.Element("Category")!.Value = product.category.ToString();
+        existing.Element("Name")!.Value = product.name;
+        existing.Element("Price")!.Value = product.price.ToString();
+        existing.Element("Amount")!.Value = product.amount.ToString();
+
+        root.Save(filePath);
     }
 
-    public void Delete(int cusId)
+    public void Delete(int id)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
+        if (!File.Exists(filePath))
+            throw new DalFileNotExsist();
 
-        if (File.Exists(filePath))
-        {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                customers = serializer.Deserialize(reader) as List<Customer>;
-            }
-        }
-        else
-        {
-            customers = new List<Customer>();
-        }
-        Customer cus = customers.FirstOrDefault(c => c.CustomerId == cusId);
-        customers.Remove(cus);
+        XElement root = XElement.Load(filePath);
 
-        using (StreamWriter writer = new StreamWriter(filePath))
-        {
-            serializer.Serialize(writer, customers);
-        }
+        var product = root.Elements("Product")
+            .FirstOrDefault(p => (int)p.Element("Id") == id);
 
+        if (product == null)
+            throw new DalProductNotExsist();
 
+        product.Remove();
+
+        root.Save(filePath);
     }
-
-    public void Update(Customer cus)
-    {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<Customer>));
-        List<Customer> customers;
-
-        if (File.Exists(filePath))
-        {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                customers = serializer.Deserialize(reader) as List<Customer>;
-            }
-        }
-        else
-        {
-            customers = new List<Customer>();
-        }
-        Customer newcustomer = customers.FirstOrDefault(c => c.CustomerId == cus.CustomerId);
-
-        if (newcustomer != null)
-        {
-            customers.Remove(newcustomer);
-            customers.Add(cus);
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, customers);
-            }
-        }
-    }
-
 }

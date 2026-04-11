@@ -6,7 +6,5 @@ namespace DalApi
         Icustomer customer { get; }
         Iproduct product { get; }
         Isale sale { get; }
-
-       
     }
 }

@@ -28,6 +28,17 @@ namespace Dal
         public DalCustomerNotExsist(string massage) : base(massage) { }
         public DalCustomerNotExsist(string massage, Exception inner_exception) : base(massage, inner_exception) { }
     }
-
+    public class DalProductNotExsist : Exception
+    {
+        public DalProductNotExsist() : base() { }
+        public DalProductNotExsist(string massage) : base(massage) { }
+        public DalProductNotExsist(string massage, Exception inner_exception) : base(massage, inner_exception) { }
+    }
+    public class DalSaleNotExsist : Exception
+    {
+        public DalSaleNotExsist() : base() { }
+        public DalSaleNotExsist(string massage) : base(massage) { }
+        public DalSaleNotExsist(string massage, Exception inner_exception) : base(massage, inner_exception) { }
+    }
 
 }

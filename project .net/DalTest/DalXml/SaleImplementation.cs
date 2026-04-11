@@ -1,126 +1,106 @@
 ﻿using DalApi;
 using DalXml;
 using DO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Dal;
 
-internal class SaleImplementation:Isale
+internal class SaleImplementation : Isale
 {
     string filePath = "../xml/sales.xml";
     XmlSerializer serializer = new XmlSerializer(typeof(List<Sale>));
 
-        public int Create(Sale sale)
+    public int Create(Sale sale)
+    {
+        List<Sale> sales;
+
+        if (File.Exists(filePath))
         {
-            List<Sale> sales;
-
-            if (File.Exists(filePath))
-            {
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
-                }
-            }
-            else
-            {
-                sales = new List<Sale>();
-            }
-
-            Sale newSale = sale with { id_product = Config.SaleId };
-            sales.Add(newSale);
-
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, sales);
-            }
-
-            return newSale.id_product;
+            using StreamReader reader = new StreamReader(filePath);
+            sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
+        }
+        else
+        {
+            sales = new List<Sale>();
         }
 
-        public Sale? Read(Func<Sale, bool> filter)
-        {
-            if (!File.Exists(filePath))
-                throw new DalFileNotExsist();
+        int newId = Config.SaleId;
 
-            List<Sale> sales;
+        Sale newSale = sale with { id_product = newId }; 
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
-            }
+        sales.Add(newSale);
 
-            return sales.FirstOrDefault(filter);
-        }
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, sales);
 
-        public List<Sale> ReadAll(Func<Sale, bool>? filter = null)
-        {
-            if (!File.Exists(filePath))
-                throw new DalFileNotExsist();
+        return newId;
+    }
 
-            List<Sale> sales;
+    public Sale? Read(Func<Sale, bool> filter)
+    {
+        if (!File.Exists(filePath))
+            throw new DalFileNotExsist();
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
-            }
+        List<Sale> sales;
 
-            return filter == null
-                ? sales
-                : sales.Where(filter).ToList();
-        }
+        using StreamReader reader = new StreamReader(filePath);
+        sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
 
-        public void Update(Sale sale)
-        {
-            if (!File.Exists(filePath))
-                throw new DalFileNotExsist();
+        return sales.FirstOrDefault(filter);
+    }
 
-            List<Sale> sales;
+    public List<Sale> ReadAll(Func<Sale, bool>? filter = null)
+    {
+        if (!File.Exists(filePath))
+            throw new DalFileNotExsist();
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
-            }
+        List<Sale> sales;
 
-            int index = sales.FindIndex(s => s.id_product == sale.id_product);
+        using StreamReader reader = new StreamReader(filePath);
+        sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
 
-            if (index == -1)
-                throw new Exception("Sale not found");
+        return filter == null ? sales : sales.Where(filter).ToList();
+    }
 
-            sales[index] = sale;
+    public void Update(Sale sale)
+    {
+        if (!File.Exists(filePath))
+            throw new DalFileNotExsist();
 
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, sales);
-            }
-        }
+        List<Sale> sales;
 
-        public void Delete(int id)
-        {
-            if (!File.Exists(filePath))
-                throw new DalFileNotExsist();
+        using StreamReader reader = new StreamReader(filePath);
+        sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
 
-            List<Sale> sales;
+        int index = sales.FindIndex(s => s.id_product == sale.id_product);
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
-            }
+        if (index == -1)
+            throw new DalSaleNotExsist();
 
-            var sale = sales.FirstOrDefault(s => s.id_product == id);
+        sales[index] = sale;
 
-            if (sale == null)
-                throw new Exception("Sale not found");
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, sales);
+    }
 
-            sales.Remove(sale);
+    public void Delete(int id)
+    {
+        if (!File.Exists(filePath))
+            throw new DalFileNotExsist();
 
-            using (StreamWriter writer = new StreamWriter(filePath))
-            {
-                serializer.Serialize(writer, sales);
-            }
-        }
+        List<Sale> sales;
+
+        using StreamReader reader = new StreamReader(filePath);
+        sales = serializer.Deserialize(reader) as List<Sale> ?? new List<Sale>();
+
+        var sale = sales.FirstOrDefault(s => s.id_product == id);
+
+        if (sale == null)
+            throw new DalSaleNotExsist();
+
+        sales.Remove(sale);
+
+        using StreamWriter writer = new StreamWriter(filePath);
+        serializer.Serialize(writer, sales);
+    }
 }

@@ -2,6 +2,7 @@
 using DalApi;
 using System.Diagnostics;
 using Dal;
+using System.Transactions;
 
 namespace DalTest;
 internal class Program
@@ -208,7 +209,16 @@ internal class Program
     {
         try
         {
-            Initialization.Initialize(s_dal);
+            Console.WriteLine("with initialize preses 1 with XML preses 2");
+            int choose=int.Parse(Console.ReadLine());
+            if (choose == 1)
+            {
+                Initialization.Initialize(s_dal);
+            }
+            else
+            {
+
+            }
             MainMenu();
         }
         catch (Exception ex)

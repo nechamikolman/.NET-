@@ -1,7 +1,7 @@
 ﻿using DO;
 using DalApi;
 
-namespace DalTest;
+namespace Dal;
 
 public static class Initialization
 {

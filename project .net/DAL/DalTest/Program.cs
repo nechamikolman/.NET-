@@ -2,13 +2,37 @@
 using DalApi;
 using System.Diagnostics;
 using Dal;
-using System.Transactions;
-
-namespace DalTest;
+using System.Transactions; 
+namespace Dal;
 internal class Program
 {
     private static IDal s_dal=new DalList();
+    //private static IDal s_dal = DalXml
 
+    public static void MainMenu()
+    {
+        bool ifcontinu = true;
+        while (ifcontinu)
+        {
+            int choose;
+            Console.WriteLine("choose 1 customr 2 product 3 sale");
+            choose = int.Parse(Console.ReadLine());
+            switch (choose)
+            {
+                case 1:
+                    CustomerMenu();
+                    break;
+                case 2:
+                    ProductMenu();
+                    break;
+                case 3:
+                    SaleMenu();
+                    break;
+            }
+            Console.WriteLine("do you want to continu?");
+            ifcontinu = bool.Parse(Console.ReadLine());
+        }
+    }
     private static void ProductMenu()
     {
         int choose;
@@ -103,7 +127,20 @@ internal class Program
         if (!int.TryParse(Console.ReadLine(), out count)) count = 0;
         return new Product(code, category = (Categorys)cat, name, price, count);
     }
-
+    private static Customer AskCastomer(int identity = 0)
+    {
+        int id;
+        string name, address, phone;
+        Console.WriteLine("Enter the id of the castomer");
+        if (!int.TryParse(Console.ReadLine(), out id)) id = 10;
+        Console.WriteLine("Enter the Name of the castomer");
+        name = Console.ReadLine();
+        Console.WriteLine("Enter the address of the castomer");
+        address = Console.ReadLine();
+        Console.WriteLine("Enter the phone of the castomer");
+        phone = Console.ReadLine();
+        return new Customer(id, name, address, phone);
+    }
     private static Sale AskSale(int code = 0)
     {
         int id_product, amount_required;
@@ -123,20 +160,6 @@ internal class Program
         Console.WriteLine("Enter the date_finish_sale");
         if (!DateTime.TryParse(Console.ReadLine(), out date_finish_sale)) date_finish_sale = DateTime.Today;
         return new Sale(id_product, amount_required, final_pric, if_general_sale, date_start_sale, date_finish_sale);
-    }
-    private static Customer AskCastomer(int identity = 0)
-    {
-        int id;
-        string name, address, phone;
-        Console.WriteLine("Enter the id of the castomer");
-        if (!int.TryParse(Console.ReadLine(), out id)) id = 10;
-        Console.WriteLine("Enter the Name of the castomer");
-        name = Console.ReadLine();
-        Console.WriteLine("Enter the address of the castomer");
-        address = Console.ReadLine();
-        Console.WriteLine("Enter the phone of the castomer");
-        phone = Console.ReadLine();
-        return new Customer(id, name, address, phone);
     }
     private static void AddProduct()
     {
@@ -182,29 +205,6 @@ internal class Program
         int id = int.Parse(Console.ReadLine());
         crud.Delete(id);
     }
-    public static void MainMenu()
-    {
-        bool ifcontinu = true;
-        while (ifcontinu) {
-            int choose;
-            Console.WriteLine("choose 1 customr 2 product 3 sale");
-            choose=int.Parse(Console.ReadLine());
-            switch (choose) 
-            { 
-                case 1:
-                    CustomerMenu();
-                    break;
-                case 2:
-                    ProductMenu();
-                    break;
-                case 3: 
-                    SaleMenu();
-                    break;
-            }
-            Console.WriteLine("do you want to continu?");
-            ifcontinu = bool.Parse(Console.ReadLine());
-        }
-    }
     private static void Main(string[] args)
     {
         try
@@ -214,10 +214,6 @@ internal class Program
             if (choose == 1)
             {
                 Initialization.Initialize(s_dal);
-            }
-            else
-            {
-
             }
             MainMenu();
         }

@@ -3,7 +3,7 @@ using DalApi;
 
 namespace Dal
 {
-    internal sealed class DalList:IDal
+    public class DalList:IDal
     {
 
         private static readonly DalList instance=new DalList();

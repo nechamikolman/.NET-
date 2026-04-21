@@ -6,7 +6,7 @@ using System.Transactions;
 namespace Dal;
 internal class Program
 {
-    private static IDal s_dal=new DalList();
+    private static IDal s_dal = DalList.Instance;    
     //private static IDal s_dal = DalXml
 
     public static void MainMenu()
@@ -197,7 +197,26 @@ internal class Program
     {
         Console.WriteLine("insert id");
         int id = int.Parse(Console.ReadLine());
-        Console.WriteLine(crud.Read(id));
+        // Use a lambda to match the required Func<T, bool> parameter
+        var result = crud.Read(item =>
+        {
+            // Try to get the Id property via reflection
+            var prop = typeof(T).GetProperty("Id");
+            if (prop != null)
+            {
+                var value = prop.GetValue(item);
+                return value != null && value.Equals(id);
+            }
+            // Fallback: try "Code" property (for Product/Sale)
+            prop = typeof(T).GetProperty("Code");
+            if (prop != null)
+            {
+                var value = prop.GetValue(item);
+                return value != null && value.Equals(id);
+            }
+            return false;
+        });
+        Console.WriteLine(result);
     }
     private static void Delete<T>(ICurd<T> crud) 
     {

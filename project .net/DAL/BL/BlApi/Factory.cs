@@ -4,26 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi;
-using static DalApi.DalConfig;
+namespace BlApi;
+using static BlApi.BlConfig;
 using System.Reflection;
 public static class Factory
 {
-    public static IDal Get
+    public static IBl Get
     {
         get
         {
-            string dalType = s_dalName ?? throw new DalConfigException($"DAL name is not extracted from the configuration");
-            string dal = s_dalPackages[dalType] ?? throw new DalConfigException($"Package for {dalType} is not found in packages list in dal-config.xml");
+            string blType = s_dalName ?? throw new DalConfigException($"DAL name is not extracted from the configuration");
+            string bl = s_dalPackages[blType] ?? throw new DalConfigException($"Package for {blType} is not found in packages list in dal-config.xml");
 
-            try { Assembly.Load(dal ?? throw new DalConfigException($"Package {dal} is null")); }
-            catch (Exception ex) { throw new DalConfigException($"Failed to load {dal}.dll package", ex); }
+            try { Assembly.Load(bl ?? throw new DalConfigException($"Package {bl} is null")); }
+            catch (Exception ex) { throw new DalConfigException($"Failed to load {bl}.dll package", ex); }
 
-            Type type = Type.GetType($"Dal.{dal}, {dal}") ??
-                throw new DalConfigException($"Class Dal.{dal} was not found in {dal}.dll");
+            Type type = Type.GetType($"Dal.{bl}, {bl}") ??
+                throw new DalConfigException($"Class Dal.{bl} was not found in {bl}.dll");
 
-            return type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as IDal ??
-                throw new DalConfigException($"Class {dal} is not a singleton or wrong property name for Instance");
+            return type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as IBl ??
+                throw new DalConfigException($"Class {bl} is not a singleton or wrong property name for Instance");
         }
     }
 }

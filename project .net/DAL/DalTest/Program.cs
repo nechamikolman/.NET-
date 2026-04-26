@@ -6,8 +6,8 @@ using System.Transactions;
 namespace Dal;
 internal class Program
 {
-    private static IDal s_dal = DalList.Instance;    
-    //private static IDal s_dal = DalXml
+    //private static IDal s_dal = DalList.Instance;    
+    private static IDal s_dal = new Dal.DalXml();
 
     public static void MainMenu()
     {

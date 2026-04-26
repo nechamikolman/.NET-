@@ -16,5 +16,6 @@ namespace BO
         )
     {
         public Customer() : this(0, "", "", "") { }
+        public override string ToString() => this.ToStringProperty();
     }
 }

@@ -14,10 +14,10 @@ namespace BO
         Categorys category,
         string name,
         double price,
-        int amount,
-        List<
+        int amount
         )
     {
         public Product() : this(0, Categorys.Coffee, "", 0, 0) { }
+        public override string ToString() => this.ToStringProperty();
     }
 }

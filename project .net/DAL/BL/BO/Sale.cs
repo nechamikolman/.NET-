@@ -19,5 +19,6 @@ namespace BO
         )
     {
         public Sale() : this(0, 0, 0, false, DateTime.Today, DateTime.Today) { }
+        public override string ToString() => this.ToStringProperty();
     } 
 }

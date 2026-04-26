@@ -1,7 +1,8 @@
-﻿using DO;
-namespace DalApi
+﻿using DalApi;
+using DO;
+namespace BlApi
 {
-    public interface IDal
+    public interface IBl
     {
         Icustomer customer { get; }
         Iproduct product { get; }

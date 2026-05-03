@@ -1,7 +1,7 @@
 ﻿
-
-namespace BlApi;
 using BO;
+namespace BlApi;
+
 public interface Icustomer:ICurd<Customer>
 {
     int Create(Customer customer);

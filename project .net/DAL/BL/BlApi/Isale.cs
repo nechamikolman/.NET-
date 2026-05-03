@@ -1,6 +1,6 @@
-﻿
-namespace DalApi;
-using DO;
+﻿using BO;
+namespace BlApi;
+
 public interface Isale:ICurd<Sale>
 {
     int Create(Sale sale);

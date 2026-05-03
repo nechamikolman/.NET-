@@ -1,11 +1,11 @@
-﻿using DalApi;
-using DO;
+﻿using BlApi;
+
 namespace BlApi
 {
     public interface IBl
     {
-        Icustomer customer { get; }
-        Iproduct product { get; }
-        Isale sale { get; }
+        BlApi.Icustomer customer { get; }
+        BlApi.Iproduct product { get; }
+        BlApi.Isale sale { get; }
     }
 }

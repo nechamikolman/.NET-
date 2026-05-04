@@ -50,7 +50,8 @@ public class ProductImplemention:Iproduct
     {
         if (DataSource.Sproduct.Exists((pro) => pro.id == id))
             DataSource.Sproduct.Remove((DataSource.Sproduct.Find((pro) => pro.id == id)));
-        throw new DalIdNotExsist("product id is not exsist");
+        else
+            throw new DalIdNotExsist("product id is not exsist");
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Dal;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,6 @@ namespace BO
     {
         public Product() : this(0, Categorys.Coffee, "", 0, 0) { }
         public override string ToString() => this.ToStringProperty();
+
     }
 }

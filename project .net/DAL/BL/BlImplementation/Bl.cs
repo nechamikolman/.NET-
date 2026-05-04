@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using BlApi;
 using Dal;
 using DalApi;
 using System;
@@ -12,8 +11,8 @@ namespace BlImplementation
 {
     internal class Bl : IBl
     {
-        public BlApi.Icustomer customer =>new CustomerImplementation();
-        public BlApi.Iproduct product => new ProductImplementation();
+        public BlApi.Icustomer customer => new CustomerImplementation();
+        public BlApi.Iproduct product =>new ProductImplementation();
         public BlApi.Isale sale => new SaleImplementation();
     }
 }

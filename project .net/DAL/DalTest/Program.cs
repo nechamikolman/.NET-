@@ -7,7 +7,7 @@ namespace Dal;
 internal class Program
 {
     //private static IDal s_dal = DalList.Instance;    
-    private static IDal s_dal = new Dal.DalXml();
+    private static IDal s_dal = DalXml.Instance;
 
     public static void MainMenu()
     {

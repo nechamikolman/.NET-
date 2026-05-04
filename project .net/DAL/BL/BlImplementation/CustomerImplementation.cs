@@ -1,111 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BL;
 using BlApi;
+using BO;
 using DalApi;
 
-namespace BlImplementation
+namespace BlImplementation;
+
+internal class CustomerImplementation : BlApi.Icustomer
 {
-    internal class CustomerImplementation : BlApi.Icustomer
+    private DalApi.IDal _dal = DalApi.Factory.Get;
+
+    public int Create(BO.Customer customer)
     {
-        private DalApi.IDal _dal = DalApi.Factory.Get;
-
-        public int Create(BO.Customer customer)
+        if (customer is null) throw new ArgumentNullException(nameof(customer));
+        try
         {
-            if (customer is null) throw new ArgumentNullException(nameof(customer));
-            try
-            {
-                var d = new DO.Customer(customer.id, customer.name, customer.address, customer.phone);
-                return _dal.customer.Create(d);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while creating customer", ex);
-            }
+            return _dal.customer.Create(customer.ToDO());
         }
-
-        public BO.Customer? Read(Func<BO.Customer, bool> filter)
+        catch (Exception ex)
         {
-            if (filter is null)
-                throw new ArgumentNullException(nameof(filter));
-
-            try
-            {
-                // translate BO predicate to DO by projecting DO -> BO inside predicate
-                var doCustomer = _dal.customer.Read(d => filter(new BO.Customer(d.id, d.name, d.address, d.phone)));
-                if (doCustomer is null) return null;
-
-                return new BO.Customer(doCustomer.id, doCustomer.name, doCustomer.address, doCustomer.phone);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while reading customer", ex);
-            }
+            throw new Exception("DAL error while creating customer", ex);
         }
+    }
 
-        public List<BO.Customer?> ReadAll(Func<BO.Customer, bool>? filter = null)
+    public BO.Customer? Read(Func<BO.Customer, bool> filter)
+    {
+        if (filter is null) throw new ArgumentNullException(nameof(filter));
+        try
         {
-            try
-            {
-                // get DO list from DAL
-                var doList = _dal.customer.ReadAll(null);
-
-                // use query syntax (linq-to-object) for projection
-                var boQuery = from d in doList
-                              select new BO.Customer(d.id, d.name, d.address, d.phone);
-
-                // use extension methods (method-syntax) for optional filtering (demonstrates both styles)
-                if (filter != null)
-                    return boQuery.Where(b => filter(b)).Cast<BO.Customer?>().ToList();
-
-                return boQuery.Cast<BO.Customer?>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while reading all customers", ex);
-            }
+            var doCustomer = _dal.customer.Read(d => filter(d.ToBO()));  
+            return doCustomer?.ToBO();                                    
         }
-
-        public void Update(BO.Customer customer)
+        catch (Exception ex)
         {
-            if (customer is null) throw new ArgumentNullException(nameof(customer));
-            try
-            {
-                var d = new DO.Customer(customer.id, customer.name, customer.address, customer.phone);
-                _dal.customer.Update(d);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while updating customer", ex);
-            }
+            throw new Exception("DAL error while reading customer", ex);
         }
+    }
 
-        public void Delete(int id)
+    public List<BO.Customer?> ReadAll(Func<BO.Customer, bool>? filter = null)
+    {
+        try
         {
-            try
-            {
-                _dal.customer.Delete(id);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while deleting customer", ex);
-            }
+            var boQuery = _dal.customer.ReadAll(null)
+                              .Select(d => d.ToBO());
+
+            if (filter != null)
+                return boQuery.Where(filter)
+                              .Cast<BO.Customer?>()
+                              .ToList();
+
+            return boQuery.Cast<BO.Customer?>().ToList();
         }
-
-        public bool IfCastomerExsist(BO.Customer customer)
+        catch (Exception ex)
         {
-            if (customer is null) throw new ArgumentNullException(nameof(customer));
-            try
-            {
-                // use extension LINQ method Any (lambda) to check existence
-                return _dal.customer.ReadAll(null).Any(d => d.id == customer.id);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("DAL error while checking customer existence", ex);
-            }
+            throw new Exception("DAL error while reading all customers", ex);
+        }
+    }
+
+    public void Update(BO.Customer customer)
+    {
+        if (customer is null) throw new ArgumentNullException(nameof(customer));
+        try
+        {
+            _dal.customer.Update(customer.ToDO());  // ← ToDO
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("DAL error while updating customer", ex);
+        }
+    }
+
+    public void Delete(int id)
+    {
+        try
+        {
+            _dal.customer.Delete(id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("DAL error while deleting customer", ex);
+        }
+    }
+
+    public bool IfCustomerExist(BO.Customer customer)
+    {
+        if (customer is null) throw new ArgumentNullException(nameof(customer));
+        try
+        {
+            return _dal.customer.ReadAll(null).Any(d => d.id == customer.id);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("DAL error while checking customer existence", ex);
         }
     }
 }

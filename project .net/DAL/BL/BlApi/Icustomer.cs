@@ -9,7 +9,7 @@ public interface Icustomer:ICurd<Customer>
     List<Customer?> ReadAll(Func<Customer, bool>? filter = null);
     void Update(Customer customer);
     void Delete(int id);
-    bool IfCastomerExsist(Customer customer);
+    bool IfCustomerExist(Customer customer);
 
 
 

@@ -1,5 +1,7 @@
 ﻿
+
 namespace BO;
+
 public enum Categorys
 {
     Coffee,

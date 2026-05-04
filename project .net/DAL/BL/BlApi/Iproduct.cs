@@ -1,7 +1,7 @@
 ﻿
+using BO;
 
 namespace BlApi;
-using BO;
 
 public interface Iproduct: ICurd<Product>
 {

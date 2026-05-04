@@ -93,7 +93,7 @@ namespace BO
             return new DO.Product
             (
                 id: boProduct.id,
-                category: boProduct.category,
+                category: (DO.Categorys)boProduct.category,
                 name: boProduct.name,
                 price: boProduct.price,
                 amount: boProduct.amount

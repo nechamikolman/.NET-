@@ -52,7 +52,8 @@ public class CustomerImplemention: Icustomer
     {
         if (DataSource.Scustomers.Exists((cus) => cus.id == id))
             DataSource.Scustomers.Remove((DataSource.Scustomers.Find((cus) => cus.id == id)));
-        throw new DalIdNotExsist("customer id is not exsist");
+        else
+            throw new DalIdNotExsist("customer id is not exsist");
 
     }
 }

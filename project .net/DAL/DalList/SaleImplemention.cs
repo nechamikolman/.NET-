@@ -50,7 +50,8 @@ public class SaleImplemention:Isale
     {
         if (DataSource.Ssale.Exists((sal) => sal.id_product == id_product))
             DataSource.Ssale.Remove((DataSource.Ssale.Find((sal) =>sal.id_product== id_product)));
-        throw new DalIdNotExsist("sale id is not exsist");
+        else
+            throw new DalIdNotExsist("sale id is not exsist");
 
     }
 

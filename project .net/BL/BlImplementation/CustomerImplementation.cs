@@ -1,5 +1,4 @@
-﻿using BL;
-using BlApi;
+﻿using BlApi;
 using BO;
 using DalApi;
 
@@ -18,10 +17,9 @@ internal class CustomerImplementation : BlApi.Icustomer
         }
         catch (Exception ex)
         {
-            throw new Exception("DAL error while creating customer", ex);
+            throw new BlIdExsistException("error while creating customer", ex);
         }
     }
-
     public BO.Customer? Read(Func<BO.Customer, bool> filter)
     {
         if (filter is null) throw new ArgumentNullException(nameof(filter));
@@ -32,7 +30,7 @@ internal class CustomerImplementation : BlApi.Icustomer
         }
         catch (Exception ex)
         {
-            throw new Exception("DAL error while reading customer", ex);
+            throw new BlIdNotExsistException("error while reading customer", ex);
         }
     }
 
@@ -40,19 +38,16 @@ internal class CustomerImplementation : BlApi.Icustomer
     {
         try
         {
-            var boQuery = _dal.customer.ReadAll(null)
-                              .Select(d => d.ToBO());
-
+            var boQuery = _dal.customer.ReadAll(null).Select(d => d.ToBO());
             if (filter != null)
                 return boQuery.Where(filter)
                               .Cast<BO.Customer?>()
                               .ToList();
-
             return boQuery.Cast<BO.Customer?>().ToList();
         }
         catch (Exception ex)
         {
-            throw new Exception("DAL error while reading all customers", ex);
+            throw new BlCustomersNotExsistException("error while reading all customers", ex);
         }
     }
 
@@ -61,7 +56,7 @@ internal class CustomerImplementation : BlApi.Icustomer
         if (customer is null) throw new ArgumentNullException(nameof(customer));
         try
         {
-            _dal.customer.Update(customer.ToDO());  // ← ToDO
+            _dal.customer.Update(customer.ToDO());
         }
         catch (Exception ex)
         {

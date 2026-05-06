@@ -11,46 +11,28 @@ using BO;
 namespace BO
 {
     internal static class Tools
-    { 
-            public static string ToStringProperty<T>(this T obj, int indent = 0, HashSet<object>? visited = null)   
+    {
+        public static string ToStringProperty<T>(this T obj)
+        {
+            string str = "";
+
+            foreach (PropertyInfo item in obj.GetType().GetProperties())
             {
-                if (obj == null) return "null";
-                visited ??= new HashSet<object>(ReferenceEqualityComparer.Instance);
-                if (!visited.Add(obj))
-                    return $"[circular reference detected - {obj.GetType().Name}]\n";
-               
-                var sb = new StringBuilder();
-                string pad = new string(' ', indent * 2);
-                Type type = obj.GetType();
-
-                sb.AppendLine($"{pad}[{type.Name}]");
-
-                foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                if (item.PropertyType.IsPrimitive
+                    || item.PropertyType == typeof(DateTime)
+                    || item.PropertyType == typeof(string))
                 {
-                    object? value = prop.GetValue(obj);
-                    if (value is IEnumerable enumerable && value is not string)
-                    {
-                        sb.AppendLine($"{pad}  {prop.Name}:");
-                        int i = 0;
-                        foreach (var item in enumerable)
-                        {
-                            sb.AppendLine($"{pad}    [{i++}]:");
-                            sb.Append(item?.ToStringProperty(indent + 3, visited) ?? "null");
-                        }
-                    }
-                    else if (value == null || type.IsPrimitive || value is string
-                             || value is DateTime || value is decimal || value is Enum)
-                    {
-                        sb.AppendLine($"{pad}  {prop.Name}: {value ?? "null"}");
-                    }
-                    else
-                    {
-                        sb.AppendLine($"{pad}  {prop.Name}:");
-                        sb.Append(value.ToStringProperty(indent + 2, visited));
-                    }
+                    str += item.Name + ": " + item.GetValue(obj) + ",";
                 }
-                return sb.ToString();
+                else
+                {
+                    str += item.Name + ": ";
+                    str += item.GetValue(obj).ToStringProperty();
+                }
             }
+
+            return str;
+        }
         public static BO.Customer ToBO(this DO.Customer doCustomer)
         {
             return new BO.Customer

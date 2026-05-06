@@ -29,6 +29,12 @@ namespace BO
         public BlCustomerNotExsistException(string message) : base(message) { }
         public BlCustomerNotExsistException(string message, Exception innerException) : base(message, innerException) { }
     }
+    [Serializable]
+    public class BlCustomersNotExsistException : Exception
+    {
+        public BlCustomersNotExsistException(string message) : base(message) { }
+        public BlCustomersNotExsistException(string message, Exception innerException) : base(message, innerException) { }
+    }
 
     [Serializable]
     public class BlProductNotExsistException : Exception

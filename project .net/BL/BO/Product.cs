@@ -9,17 +9,32 @@ using System.Threading.Tasks;
 namespace BO
 {
     //entity of product details that available in the shop 
-    public record Product
-        (
-        int id,
-        Categorys category,
-        string name,
-        double price,
-        int amount
-        )
+    public class Product
     {
-        public Product() : this(0, Categorys.Coffee, "", 0, 0) { }
-        public override string ToString() => this.ToStringProperty();
+        public int id { get; set; }
+        public Categorys category { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
+        public int amount { get; set; }
 
+        public Product()
+        {
+            id = 0;
+            category = Categorys.Coffee;
+            name = string.Empty;
+            price = 0;
+            amount = 0;
+        }
+
+        public Product(int id, Categorys category, string name, double price, int amount)
+        {
+            this.id = id;
+            this.category = category;
+            this.name = name;
+            this.price = price;
+            this.amount = amount;
+        }
+
+        public override string ToString() => this.ToStringProperty();
     }
 }

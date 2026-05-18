@@ -20,11 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{767C91B1-A4B
 		xml\sales.xml = xml\sales.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{86B9DE31-D624-491B-8C8E-B515A72B3C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{86B9DE31-D624-491B-8C8E-B515A72B3C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{E6CBAAE2-19A0-79CF-BBEE-F0E052F4D7AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{E6CBAAE2-19A0-79CF-BBEE-F0E052F4D7AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{5216C38A-137E-4E00-8444-850EEA5FA04B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{AE8DA725-DE51-473B-B816-4EA75C3BF64E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +56,10 @@ Global
 		{E6CBAAE2-19A0-79CF-BBEE-F0E052F4D7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6CBAAE2-19A0-79CF-BBEE-F0E052F4D7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6CBAAE2-19A0-79CF-BBEE-F0E052F4D7AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5216C38A-137E-4E00-8444-850EEA5FA04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5216C38A-137E-4E00-8444-850EEA5FA04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5216C38A-137E-4E00-8444-850EEA5FA04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5216C38A-137E-4E00-8444-850EEA5FA04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE8DA725-DE51-473B-B816-4EA75C3BF64E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE8DA725-DE51-473B-B816-4EA75C3BF64E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE8DA725-DE51-473B-B816-4EA75C3BF64E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE8DA725-DE51-473B-B816-4EA75C3BF64E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

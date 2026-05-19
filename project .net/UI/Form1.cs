@@ -6,5 +6,11 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        private void welcom_button_Click(object sender, EventArgs e)
+        {
+            new Main().ShowDialog();
+
+        }
     }
 }

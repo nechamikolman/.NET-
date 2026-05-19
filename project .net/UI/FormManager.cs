@@ -16,5 +16,22 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        private void Products_Management_Button_Click(object sender, EventArgs e)
+        {
+            new FormProductsManagement().ShowDialog();
+        }
+
+        private void Customers_Management_Button_Click(object sender, EventArgs e)
+        {
+            new FormCustomersManagement().ShowDialog();
+        }
+
+        private void Sale_Management_Button_Click(object sender, EventArgs e)
+        {
+            new FormSaleManagement().ShowDialog();
+        }
+
+       
     }
 }

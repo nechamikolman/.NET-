@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            welcom_button = new Button();
+            SuspendLayout();
+            // 
+            // welcom_button
+            // 
+            welcom_button.Location = new Point(275, 112);
+            welcom_button.Name = "welcom_button";
+            welcom_button.Size = new Size(256, 135);
+            welcom_button.TabIndex = 0;
+            welcom_button.Text = "welcome";
+            welcom_button.UseVisualStyleBackColor = true;
+            welcom_button.Click += welcom_button_Click;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(welcom_button);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button welcom_button;
     }
 }

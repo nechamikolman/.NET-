@@ -34,19 +34,21 @@
             // 
             // Manger_Button
             // 
-            Manger_Button.Location = new Point(296, 80);
+            Manger_Button.Location = new Point(338, 107);
+            Manger_Button.Margin = new Padding(3, 4, 3, 4);
             Manger_Button.Name = "Manger_Button";
-            Manger_Button.Size = new Size(260, 124);
+            Manger_Button.Size = new Size(297, 165);
             Manger_Button.TabIndex = 0;
             Manger_Button.Text = "Manager";
             Manger_Button.UseVisualStyleBackColor = true;
-            Manger_Button.Click += button1_Click;
+            Manger_Button.Click += Manger_Button_Click;
             // 
             // Cashier_Button
             // 
-            Cashier_Button.Location = new Point(296, 225);
+            Cashier_Button.Location = new Point(338, 300);
+            Cashier_Button.Margin = new Padding(3, 4, 3, 4);
             Cashier_Button.Name = "Cashier_Button";
-            Cashier_Button.Size = new Size(260, 125);
+            Cashier_Button.Size = new Size(297, 167);
             Cashier_Button.TabIndex = 1;
             Cashier_Button.Text = "Cashier";
             Cashier_Button.UseVisualStyleBackColor = true;
@@ -54,11 +56,13 @@
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = Properties.Resources._69b68fd7300b151284f7f44ed452e64a__1_;
+            ClientSize = new Size(914, 600);
             Controls.Add(Cashier_Button);
             Controls.Add(Manger_Button);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Main";
             Text = "Main";
             ResumeLayout(false);

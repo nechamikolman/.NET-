@@ -20,12 +20,12 @@ namespace UI
 
         private void Manger_Button_Click(object sender, EventArgs e)
         {
-
+            new FormManager().ShowDialog();
         }
 
         private void Cashier_Button_Click(object sender, EventArgs e)
         {
-
+            new FormCashier().ShowDialog();
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿namespace UI
 {
-    partial class FormProductsCashier
+    partial class FormOrderCashier
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -31,7 +29,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormProductsCashier";
+            this.Text = "FormOrderCashier";
         }
 
         #endregion

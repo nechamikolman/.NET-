@@ -19,7 +19,6 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -53,7 +52,7 @@
         }
 
         #endregion
-
         private Button welcom_button;
+
     }
 }

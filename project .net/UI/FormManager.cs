@@ -32,6 +32,9 @@ namespace UI
             new FormSaleManagement().ShowDialog();
         }
 
-       
+        private void FormManager_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

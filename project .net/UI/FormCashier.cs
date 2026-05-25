@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UI
@@ -17,14 +10,14 @@ namespace UI
             InitializeComponent();
         }
 
-        private void Products_Cashier_Button_Click(object sender, EventArgs e)
+        private void Order_Button_Click(object sender, EventArgs e)
         {
-            new FormProductsCashier().ShowDialog();
+            new FormOrderCashier().ShowDialog();
         }
 
-        private void Customers_Management_Button_Click(object sender, EventArgs e)
+        private void FormCashier_Load(object sender, EventArgs e)
         {
-            new FormCustomersManagement().ShowDialog();
+
         }
     }
 }

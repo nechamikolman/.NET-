@@ -15,7 +15,7 @@ namespace UI
 {
     public partial class FormCustomersManagement : Form
     {
-        private readonly IBl bl = BlApi.Factory.Get();
+        private readonly IBl bl = BlApi.Factory.Get;
 
         public FormCustomersManagement()
         {

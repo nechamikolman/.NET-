@@ -15,7 +15,7 @@ namespace UI
 {
     public partial class FormProductsManagement : Form
     {
-        private readonly IBl bl = BlApi.Factory.Get();
+        private readonly IBl bl = BlApi.Factory.Get;
 
         public FormProductsManagement()
         {
@@ -125,6 +125,11 @@ namespace UI
             txtName.Text = "";
             txtPrice.Text = "";
             txtAmount.Text = "";
+        }
+
+        private void FormProductsManagement_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

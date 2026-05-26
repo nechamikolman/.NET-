@@ -21,6 +21,13 @@ namespace UI
         {
             InitializeComponent();
             cmbCategory.DataSource = Enum.GetValues(typeof(Categorys));
+
+            // מילוי ה-ComboBox של הסינון
+            cmbFilterCategory.Items.Clear();
+            cmbFilterCategory.Items.Add("הכל");
+            foreach (Categorys c in Enum.GetValues(typeof(Categorys)))
+                cmbFilterCategory.Items.Add(c);
+            cmbFilterCategory.SelectedIndex = 0; // ברירת מחדל: "הכל"
         }
 
         // ── Read Single ──────────────────────────────────────────────
@@ -49,13 +56,12 @@ namespace UI
                 if (cmbFilterCategory.SelectedItem is Categorys cat)
                     list = bl.product.ReadAll(p => p.category == cat);
                 else
-                    list = bl.product.ReadAll();
+                    list = bl.product.ReadAll(); // נבחר "הכל"
 
                 dataGridView.DataSource = list;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
         // ── Create ───────────────────────────────────────────────────
         private void btnCreate_Click(object sender, EventArgs e)
         {

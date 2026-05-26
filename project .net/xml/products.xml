@@ -1,2 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProduct />
+<ArrayOfProduct>
+  <Product>
+    <Id>1009</Id>
+    <Category>Iced_Cold_Drinks</Category>
+    <Name>ic_coffe_cookies</Name>
+    <Price>10</Price>
+    <Amount>18</Amount>
+  </Product>
+  <Product>
+    <Id>1010</Id>
+    <Category>Sweets</Category>
+    <Name>chocolat</Name>
+    <Price>8</Price>
+    <Amount>56</Amount>
+  </Product>
+  <Product>
+    <Id>1011</Id>
+    <Category>Coffee</Category>
+    <Name>espreso</Name>
+    <Price>12</Price>
+    <Amount>100</Amount>
+  </Product>
+  <Product>
+    <Id>1012</Id>
+    <Category>Coffee</Category>
+    <Name>upside down coffee</Name>
+    <Price>16</Price>
+    <Amount>85</Amount>
+  </Product>
+  <Product>
+    <Id>1013</Id>
+    <Category>Coffee</Category>
+    <Name>cappuccino</Name>
+    <Price>14</Price>
+    <Amount>96</Amount>
+  </Product>
+  <Product>
+    <Id>1014</Id>
+    <Category>Coffee</Category>
+    <Name>lauta</Name>
+    <Price>18</Price>
+    <Amount>102</Amount>
+  </Product>
+  <Product>
+    <Id>1015</Id>
+    <Category>Sweets</Category>
+    <Name>chocolate cake</Name>
+    <Price>28</Price>
+    <Amount>56</Amount>
+  </Product>
+  <Product>
+    <Id>1016</Id>
+    <Category>Sweets</Category>
+    <Name>Vanilla cupcakes</Name>
+    <Price>18</Price>
+    <Amount>102</Amount>
+  </Product>
+  <Product>
+    <Id>1017</Id>
+    <Category>Sweets</Category>
+    <Name>Chocolate chip cookie</Name>
+    <Price>10</Price>
+    <Amount>45</Amount>
+  </Product>
+  <Product>
+    <Id>1018</Id>
+    <Category>Iced_Cold_Drinks</Category>
+    <Name>Vanilla shake</Name>
+    <Price>20</Price>
+    <Amount>75</Amount>
+  </Product>
+  <Product>
+    <Id>1019</Id>
+    <Category>Iced_Cold_Drinks</Category>
+    <Name>cold coffe</Name>
+    <Price>24</Price>
+    <Amount>38</Amount>
+  </Product>
+</ArrayOfProduct>

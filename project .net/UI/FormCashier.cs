@@ -17,7 +17,8 @@ namespace UI
 
         private void FormCashier_Load(object sender, EventArgs e)
         {
-
+            //this.BackgroundImage = Properties.Resources._69b68fd7300b151284f7f44ed452e64a_1_;
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
         }
     }
 }

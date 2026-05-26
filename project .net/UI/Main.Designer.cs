@@ -34,24 +34,28 @@
             // 
             // Manger_Button
             // 
-            Manger_Button.Location = new Point(338, 107);
+            Manger_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Manger_Button.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Manger_Button.Location = new Point(338, 180);
             Manger_Button.Margin = new Padding(3, 4, 3, 4);
             Manger_Button.Name = "Manger_Button";
-            Manger_Button.Size = new Size(297, 165);
+            Manger_Button.Size = new Size(297, 100);
             Manger_Button.TabIndex = 0;
             Manger_Button.Text = "Manager";
-            Manger_Button.UseVisualStyleBackColor = true;
+            Manger_Button.UseVisualStyleBackColor = false;
             Manger_Button.Click += Manger_Button_Click;
             // 
             // Cashier_Button
             // 
+            Cashier_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Cashier_Button.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Cashier_Button.Location = new Point(338, 300);
             Cashier_Button.Margin = new Padding(3, 4, 3, 4);
             Cashier_Button.Name = "Cashier_Button";
-            Cashier_Button.Size = new Size(297, 167);
+            Cashier_Button.Size = new Size(297, 100);
             Cashier_Button.TabIndex = 1;
             Cashier_Button.Text = "Cashier";
-            Cashier_Button.UseVisualStyleBackColor = true;
+            Cashier_Button.UseVisualStyleBackColor = false;
             Cashier_Button.Click += Cashier_Button_Click;
             // 
             // Main

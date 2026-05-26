@@ -121,4 +121,10 @@
   <data name="69b68fd7300b151284f7f44ed452e64a (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\69b68fd7300b151284f7f44ed452e64a (1).jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="2017631294" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2017631294.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="סוגי-קפה-מומלצים-768x432" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\סוגי-קפה-מומלצים-768x432.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

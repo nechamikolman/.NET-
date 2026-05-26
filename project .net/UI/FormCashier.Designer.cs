@@ -20,13 +20,15 @@
             // 
             // Order_Button
             // 
+            Order_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Order_Button.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Order_Button.Location = new Point(328, 200);
             Order_Button.Margin = new Padding(3, 4, 3, 4);
             Order_Button.Name = "Order_Button";
             Order_Button.Size = new Size(258, 76);
             Order_Button.TabIndex = 0;
             Order_Button.Text = "בניית הזמנה";
-            Order_Button.UseVisualStyleBackColor = true;
+            Order_Button.UseVisualStyleBackColor = false;
             Order_Button.Click += Order_Button_Click;
             // 
             // FormCashier

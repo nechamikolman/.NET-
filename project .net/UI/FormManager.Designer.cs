@@ -35,35 +35,41 @@
             // 
             // Products_Management_Button
             // 
+            Products_Management_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Products_Management_Button.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Products_Management_Button.Location = new Point(349, 123);
             Products_Management_Button.Margin = new Padding(3, 4, 3, 4);
             Products_Management_Button.Name = "Products_Management_Button";
             Products_Management_Button.Size = new Size(258, 76);
             Products_Management_Button.TabIndex = 0;
             Products_Management_Button.Text = "Products Management";
-            Products_Management_Button.UseVisualStyleBackColor = true;
+            Products_Management_Button.UseVisualStyleBackColor = false;
             Products_Management_Button.Click += Products_Management_Button_Click;
             // 
             // Customers_Management_Button
             // 
+            Customers_Management_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Customers_Management_Button.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Customers_Management_Button.Location = new Point(349, 227);
             Customers_Management_Button.Margin = new Padding(3, 4, 3, 4);
             Customers_Management_Button.Name = "Customers_Management_Button";
             Customers_Management_Button.Size = new Size(258, 76);
             Customers_Management_Button.TabIndex = 1;
             Customers_Management_Button.Text = "Customers Management";
-            Customers_Management_Button.UseVisualStyleBackColor = true;
+            Customers_Management_Button.UseVisualStyleBackColor = false;
             Customers_Management_Button.Click += Customers_Management_Button_Click;
             // 
             // Sale_Management_Button
             // 
+            Sale_Management_Button.BackColor = Color.FromArgb(128, 64, 0);
+            Sale_Management_Button.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Sale_Management_Button.Location = new Point(349, 325);
             Sale_Management_Button.Margin = new Padding(3, 4, 3, 4);
             Sale_Management_Button.Name = "Sale_Management_Button";
             Sale_Management_Button.Size = new Size(258, 76);
             Sale_Management_Button.TabIndex = 2;
             Sale_Management_Button.Text = "Sales Management";
-            Sale_Management_Button.UseVisualStyleBackColor = true;
+            Sale_Management_Button.UseVisualStyleBackColor = false;
             Sale_Management_Button.Click += Sale_Management_Button_Click;
             // 
             // FormManager

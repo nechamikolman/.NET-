@@ -1,2 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfSale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfSale xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Sale>
+		<id_product>1011</id_product>
+		<amount_required>1</amount_required>
+		<final_price>9</final_price>
+		<if_general_sale>false</if_general_sale>
+		<date_start_sale>2026-06-01</date_start_sale>
+		<date_finish_sale>2026-06-30</date_finish_sale>
+	</Sale>
+	<Sale>
+		<id_product>1019</id_product>
+		<amount_required>1</amount_required>
+		<final_price>18</final_price>
+		<if_general_sale>false</if_general_sale>
+		<date_start_sale>2026-07-01</date_start_sale>
+		<date_finish_sale>2026-08-31</date_finish_sale>
+	</Sale>
+	<Sale>
+		<id_product>1015</id_product>
+		<amount_required>2</amount_required>
+		<final_price>22</final_price>
+		<if_general_sale>false</if_general_sale>
+		<date_start_sale>2026-06-01</date_start_sale>
+		<date_finish_sale>2026-12-31</date_finish_sale>
+	</Sale>
+	<Sale>
+		<id_product>0</id_product>
+		<amount_required>1</amount_required>
+		<final_price>0.9</final_price>
+		<if_general_sale>true</if_general_sale>
+		<date_start_sale>2026-06-05</date_start_sale>
+		<date_finish_sale>2026-06-05</date_finish_sale>
+	</Sale>
+</ArrayOfSale>

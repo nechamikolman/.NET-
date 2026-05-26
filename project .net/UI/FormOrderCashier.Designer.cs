@@ -108,6 +108,8 @@
             btnAddById.Name = "btnAddById";
             btnAddById.Size = new Size(170, 35);
             btnAddById.TabIndex = 4;
+            btnAddById.BackColor = Color.White;
+            btnAddById.FlatStyle = FlatStyle.Flat;
             btnAddById.Text = "הוסף לפי קוד";
             btnAddById.Click += btnAddById_Click;
             // 
@@ -117,12 +119,15 @@
             btnAddFromList.Name = "btnAddFromList";
             btnAddFromList.Size = new Size(170, 35);
             btnAddFromList.TabIndex = 7;
+            btnAddFromList.BackColor = Color.White;
+            btnAddFromList.FlatStyle = FlatStyle.Flat;
             btnAddFromList.Text = "הוסף מרשימה";
             btnAddFromList.Click += btnAddFromList_Click;
             // 
             // btnDoOrder
             // 
-            btnDoOrder.BackColor = Color.LightGreen;
+            btnDoOrder.BackColor = Color.FromArgb(128, 64, 0);
+            btnDoOrder.FlatStyle = FlatStyle.Flat;
             btnDoOrder.Location = new Point(460, 330);
             btnDoOrder.Name = "btnDoOrder";
             btnDoOrder.Size = new Size(170, 45);
@@ -165,6 +170,7 @@
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             Text = "בניית הזמנה";
+            BackColor = Color.FromArgb(128, 64, 0);
             Load += FormOrderCashier_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewOrder).EndInit();
             ResumeLayout(false);

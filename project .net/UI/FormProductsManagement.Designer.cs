@@ -135,6 +135,8 @@
             btnReadOne.Name = "btnReadOne";
             btnReadOne.Size = new Size(100, 35);
             btnReadOne.TabIndex = 12;
+            btnReadOne.BackColor = Color.White;
+            btnReadOne.FlatStyle = FlatStyle.Flat;
             btnReadOne.Text = "הצג בודד";
             btnReadOne.Click += btnReadOne_Click;
             // 
@@ -144,6 +146,8 @@
             btnReadAll.Name = "btnReadAll";
             btnReadAll.Size = new Size(100, 35);
             btnReadAll.TabIndex = 13;
+            btnReadAll.BackColor = Color.White;
+            btnReadAll.FlatStyle = FlatStyle.Flat;
             btnReadAll.Text = "הצג הכל";
             btnReadAll.Click += btnReadAll_Click;
             // 
@@ -153,6 +157,8 @@
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(100, 35);
             btnCreate.TabIndex = 14;
+            btnCreate.BackColor = Color.White;
+            btnCreate.FlatStyle = FlatStyle.Flat;
             btnCreate.Text = "הוסף";
             btnCreate.Click += btnCreate_Click;
             // 
@@ -162,6 +168,8 @@
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(100, 35);
             btnUpdate.TabIndex = 15;
+            btnUpdate.BackColor = Color.White;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Text = "עדכן";
             btnUpdate.Click += btnUpdate_Click;
             // 
@@ -171,6 +179,8 @@
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(100, 35);
             btnDelete.TabIndex = 16;
+            btnDelete.BackColor = Color.White;
+            btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Text = "מחק";
             btnDelete.Click += btnDelete_Click;
             // 
@@ -213,6 +223,7 @@
             RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             Text = "ניהול מוצרים";
+            BackColor = Color.FromArgb(128, 64, 0);
             Load += FormProductsManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);

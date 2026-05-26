@@ -10,8 +10,9 @@
 
 namespace UI.Properties {
     using System;
-    
-    
+    using System.Drawing;
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,7 +24,7 @@ namespace UI.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+        //internal static Image _69b68fd7300b151284f7f44ed452e64a_1_;
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -66,6 +67,16 @@ namespace UI.Properties {
         internal static System.Drawing.Bitmap _69b68fd7300b151284f7f44ed452e64a__1_ {
             get {
                 object obj = ResourceManager.GetObject("69b68fd7300b151284f7f44ed452e64a (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap סוגי_קפה_מומלצים_768x432 {
+            get {
+                object obj = ResourceManager.GetObject("סוגי-קפה-מומלצים-768x432", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

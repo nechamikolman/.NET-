@@ -16,6 +16,7 @@ namespace UI
             InitializeComponent();
             LoadProductsCombo();
             RefreshOrderDisplay();
+            this.Activated += (s, e) => LoadProductsCombo(); 
         }
 
         // ── Load products into combo box ─────────────────────────────
@@ -49,6 +50,7 @@ namespace UI
                 bl.order.AddProductToOrder(_order, id, amount);
                 bl.order.CalcTotalPrice(_order);
                 RefreshOrderDisplay();
+                LoadProductsCombo(); 
                 txtProductId.Text = "";
                 txtAmount.Text = "1";
             }
@@ -73,6 +75,7 @@ namespace UI
                 bl.order.AddProductToOrder(_order, id, amount);
                 bl.order.CalcTotalPrice(_order);
                 RefreshOrderDisplay();
+                LoadProductsCombo(); 
                 txtAmount.Text = "1";
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

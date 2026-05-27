@@ -32,4 +32,12 @@
 		<date_start_sale>2026-06-05</date_start_sale>
 		<date_finish_sale>2026-06-05</date_finish_sale>
 	</Sale>
+	<Sale>
+		<id_product>1013</id_product>
+		<amount_required>1</amount_required>
+		<final_price>11</final_price>
+		<if_general_sale>true</if_general_sale>
+		<date_start_sale>2026-05-01</date_start_sale>
+		<date_finish_sale>2026-05-31</date_finish_sale>
+	</Sale>
 </ArrayOfSale>

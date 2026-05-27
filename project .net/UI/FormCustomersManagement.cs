@@ -35,6 +35,7 @@ namespace UI
                 Customer? c = bl.customer.Read(x => x.id == id);
                 if (c == null) { MessageBox.Show("לקוח לא נמצא."); return; }
                 FillFields(c);
+                dataGridView.DataSource = new List<Customer?> { c };
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

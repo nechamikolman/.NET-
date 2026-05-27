@@ -12,14 +12,14 @@
     <Category>Sweets</Category>
     <Name>chocolat</Name>
     <Price>8</Price>
-    <Amount>56</Amount>
+    <Amount>55</Amount>
   </Product>
   <Product>
     <Id>1011</Id>
     <Category>Coffee</Category>
     <Name>espreso</Name>
     <Price>12</Price>
-    <Amount>100</Amount>
+    <Amount>90</Amount>
   </Product>
   <Product>
     <Id>1012</Id>
@@ -33,7 +33,7 @@
     <Category>Coffee</Category>
     <Name>cappuccino</Name>
     <Price>14</Price>
-    <Amount>96</Amount>
+    <Amount>95</Amount>
   </Product>
   <Product>
     <Id>1014</Id>
@@ -54,7 +54,7 @@
     <Category>Sweets</Category>
     <Name>Vanilla cupcakes</Name>
     <Price>18</Price>
-    <Amount>102</Amount>
+    <Amount>101</Amount>
   </Product>
   <Product>
     <Id>1017</Id>
@@ -76,5 +76,12 @@
     <Name>cold coffe</Name>
     <Price>24</Price>
     <Amount>38</Amount>
+  </Product>
+  <Product>
+    <Id>1012</Id>
+    <Category>Pastries</Category>
+    <Name>ghjgh</Name>
+    <Price>8</Price>
+    <Amount>45</Amount>
   </Product>
 </ArrayOfProduct>

@@ -91,7 +91,7 @@
             lblPreferred.Name = "lblPreferred";
             lblPreferred.Size = new Size(95, 23);
             lblPreferred.TabIndex = 8;
-            lblPreferred.Text = "לקוח מועדפון:";
+            lblPreferred.Text = "לקוח מועדון:";
             // 
             // lblTotal
             // 

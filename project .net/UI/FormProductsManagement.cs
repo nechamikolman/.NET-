@@ -43,6 +43,7 @@ namespace UI
                 Product? p = bl.product.Read(x => x.id == id);
                 if (p == null) { MessageBox.Show("מוצר לא נמצא."); return; }
                 FillFields(p);
+                dataGridView.DataSource = new List<Product?> { p };
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

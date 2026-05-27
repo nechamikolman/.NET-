@@ -150,9 +150,9 @@ namespace BlImplementation
                 foreach (var ds in doSales)
                 {
                     if (ds is null) continue;
-                    if (today < ds.date_start_sale || today > ds.date_finish_sale) continue;              
+                    if (today < ds.date_start_sale || today > ds.date_finish_sale) continue;
+                    if (!ds.if_general_sale && !IsPreferred) continue;
                     if (!ds.if_general_sale && ds.amount_required > productInOrder.amount) continue;
-                    if (!IsPreferred && !ds.if_general_sale) continue;
                     matching.Add(new SaleInProduct(ds.id_product, ds.amount_required, ds.final_price, ds.if_general_sale));
                 }
                 // ensure the sales list exists and update it

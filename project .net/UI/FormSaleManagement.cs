@@ -28,6 +28,7 @@ namespace UI
                 Sale? s = bl.sale.Read(x => x.id_product == id);
                 if (s == null) { MessageBox.Show("מבצע לא נמצא."); return; }
                 FillFields(s);
+                dataGridView.DataSource = new List<Sale?> { s };
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
